@@ -7,6 +7,8 @@ services:
       - POSTGRES_USER=airflow
       - POSTGRES_PASSWORD=airflow
       - POSTGRES_DB=airflow
+    #volumes:
+     # - postgres_data:/var/lib/postgresql/data
 
 # Docker image - free express version for dev and similar
 # From https://container-registry.oracle.com/
@@ -18,6 +20,8 @@ services:
       - ORACLE_PWD=your_oracle_password
     ports:
       - "1521:1521"
+    volumes:
+      - oracle_data:/opt/oracle/oradata
 
   mysql:
     image: mysql:8.0
@@ -29,6 +33,8 @@ services:
       - MYSQL_PASSWORD=your_mysql_password
     ports:
       - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
 
   webserver:
     image: apache/airflow:2.7.1
