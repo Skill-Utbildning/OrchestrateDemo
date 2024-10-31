@@ -74,3 +74,7 @@ services:
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
     command: scheduler
+volumes:
+  #postgres_data:
+  oracle_data:
+  mysql_data:
