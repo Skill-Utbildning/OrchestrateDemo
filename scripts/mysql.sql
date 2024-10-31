@@ -1,0 +1,25 @@
+CREATE DATABASE IF NOT EXISTS customers;
+
+USE customers;
+
+CREATE TABLE IF NOT EXISTS Customers (
+    CustomerID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(255) NOT NULL,
+    Age INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Accounts (
+    AccountID INT AUTO_INCREMENT PRIMARY KEY,
+    AccountNumber VARCHAR(20) NOT NULL,
+    CustomerID INT,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
+CREATE TABLE IF NOT EXISTS ContactDetails (
+    ContactID INT AUTO_INCREMENT PRIMARY KEY,
+    Address VARCHAR(255),
+    Phone VARCHAR(20),
+    Email VARCHAR(100),
+    CustomerID INT,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
