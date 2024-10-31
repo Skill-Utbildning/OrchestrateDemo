@@ -2,15 +2,41 @@ version: '3'
 services:
   postgres:
     image: postgres:13
+    #image: artifactory.oneadr.net/remote-docker-hub/postgres:13
     environment:
       - POSTGRES_USER=airflow
       - POSTGRES_PASSWORD=airflow
       - POSTGRES_DB=airflow
 
+# Docker image - free express version for dev and similar
+# From https://container-registry.oracle.com/
+# Docs http://docs.oracle.com/en/database/
+  oracle:
+    image: container-registry.oracle.com/database/express:21.3.0-xe
+    # image: artifactory.oneadr.net/remote-docker-hub/container-registry.oracle.com/database/express:21.3.0-xe
+    environment:
+      - ORACLE_PWD=your_oracle_password
+    ports:
+      - "1521:1521"
+
+  mysql:
+    image: mysql:8.0
+    # image: artifactory.oneadr.net/remote-docker-hub/mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=your_mysql_root_password
+      - MYSQL_DATABASE=your_database_name
+      - MYSQL_USER=your_mysql_user
+      - MYSQL_PASSWORD=your_mysql_password
+    ports:
+      - "3306:3306"
+
   webserver:
     image: apache/airflow:2.7.1
+    # image: artifactory.oneadr.net/remote-docker-hub/apache/airflow:2.7.1
     depends_on:
       - postgres
+      - oracle
+      - mysql
     environment:
       - LOAD_EX=n
       - EXECUTOR=Local
@@ -29,8 +55,11 @@ services:
 
   scheduler:
     image: apache/airflow:2.7.1
+    # image: artifactory.oneadr.net/remote-docker-hub/apache/airflow:2.7.1
     depends_on:
       - postgres
+      - oracle
+      - mysql
     environment:
       - LOAD_EX=n
       - EXECUTOR=Local

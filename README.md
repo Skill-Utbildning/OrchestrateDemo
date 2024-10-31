@@ -14,3 +14,5 @@ This will start Airflow and its dependencies. The webserver will be accessible a
 
 Take down with:
 `docker-compose down`
+
+Remember to replace `your_oracle_password`, `your_mysql_root_password`, `your_database_name`, `your_mysql_user`, and `your_mysql_password` with appropriate values for your setup
