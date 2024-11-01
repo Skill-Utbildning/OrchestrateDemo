@@ -9,6 +9,9 @@ __pycache__/
 # Distribution / packaging
 .Python
 build/
+logs/
+mysql_data
+oracle_data
 develop-eggs/
 dist/
 downloads/
