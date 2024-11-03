@@ -11,11 +11,12 @@ default_args = {
     'retry_delay': timedelta(minutes=5),
 }
 
-def sample_task():
-    print("Executing sample task")
+def readcsv():
+    account_df = pd.read_csv("./scripts/data/account.csv")
+    print(account_df.head())
 
 with DAG(
-    'example_dag',
+    'readcsv',
     default_args=default_args,
     description='A simple example DAG',
     schedule_interval=timedelta(days=1),
@@ -24,8 +25,8 @@ with DAG(
 ) as dag:
 
     task1 = PythonOperator(
-        task_id='sample_task',
-        python_callable=sample_task,
+        task_id='readcsv',
+        python_callable=readcsv,
     )
 
     task1
