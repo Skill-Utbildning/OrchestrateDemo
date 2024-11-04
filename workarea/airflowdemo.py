@@ -12,8 +12,9 @@ default_args = {
     'retry_delay': timedelta(minutes=5),
 }
 
+
 def readcsv():
-    account_df = pd.read_csv("https://raw.githubusercontent.com/Skill-Utbildning/OrchestrateDemo/refs/heads/main/scripts/data/account.csv")
+    account_df = pd.read_csv("./scripts/data/account.csv")
     print(account_df.head())
 
 with DAG(
